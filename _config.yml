@@ -7,6 +7,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://chobitly.github.io" # the base hostname & protocol for your site
 twitter_username: chobitly
 github_username:  chobitly
+gplus_username:   汪璐chobitly
 
 # Build settings
 markdown: kramdown
