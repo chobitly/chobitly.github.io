@@ -1,0 +1,21 @@
+menu:
+  Home: /
+  Archives: /archives
+  About: /about
+
+addthis:
+  enable: true
+  pubid:
+  facebook: true
+  twitter: true
+  google: true
+  pinterest: true
+
+facebook:
+google_plus:
+twitter:
+github:
+
+fancybox: true
+google_analytics:
+rss:
