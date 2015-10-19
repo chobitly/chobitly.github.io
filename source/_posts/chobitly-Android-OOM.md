@@ -1,7 +1,6 @@
-layout: post
 title:  记一次Android OOM问题的解决
 date:   2013-07-01 18:39:19
-categories: Android OOM
+tags: Android
 ---
 
      

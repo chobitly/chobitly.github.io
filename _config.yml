@@ -68,4 +68,9 @@ theme: yilia
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+- type: git
+  repo: https://github.com/chobitly/chobitly.github.io.git
+  branch: master
+- type: git
+  repo: https://gitcafe.com/chobitly/chobitly.git
+  branch: gitcafe-pages
