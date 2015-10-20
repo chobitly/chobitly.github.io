@@ -4,6 +4,7 @@ tags: Android
 ---
 
 记录一下公司工作里使用AndroidAnnotations出现的一个问题的解决。
+<!--more-->
 由AA的实现机制可知，一个被标记为`@Background`的方法，例如：
 
 	@EActivity(R.layout.activity_main)

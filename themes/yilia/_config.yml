@@ -2,7 +2,8 @@
 menu:
   主页: /
   所有文章: /archives
-  # 随笔: /tags/随笔
+  #Android: /tags/Android
+  关于我: /about
 
 # SubNav
 subnav:
@@ -40,7 +41,7 @@ avatar: https://avatars1.githubusercontent.com/u/498196?v=3&s=460
 share: true
 #是否开启多说评论，填写你在多说申请的项目名称 duoshuo: duoshuo-key
 #若使用disqus，请在博客config文件中填写disqus_shortname，并关闭多说评论
-duoshuo: true
+duoshuo: chobitly
 #是否开启云标签
 tagcloud: true
 
@@ -58,6 +59,6 @@ friends: false
 
 #是否开启“关于我”。
 #不开启——
-#aboutme: false
+aboutme: false
 #开启——
-aboutme: 程序媛, Android Developer, Java Developer, ..., Ingresser, 二次元爱好者, 会一些跟外表不大合衬的技能, 但却不会做饭, ...
+#aboutme: 程序媛, Android Developer, Java Developer, ..., Ingresser, 二次元爱好者, 会一些跟外表不大合衬的技能, 但却不会做饭, ...
