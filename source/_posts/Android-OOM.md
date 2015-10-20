@@ -1,7 +1,8 @@
 title:  记一次Android OOM问题的解决
 date:   2013-07-01 18:39:19
-tags: Android
-excerpt: true
+tags:	
+	- Android
+	- OOM
 ---
 
      

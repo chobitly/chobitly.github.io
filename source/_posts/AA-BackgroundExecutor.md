@@ -1,6 +1,8 @@
-title:  Somethings about AA's BackgroundExecutor
-date:   2015-05-07 22:51:51
-tags: Android
+title:	Somethings about AA's BackgroundExecutor
+date:	2015-05-07 22:51:51
+tags:	
+	- Android
+	- AndroidAnnotations
 ---
 
 记录一下公司工作里使用AndroidAnnotations出现的一个问题的解决过程。
