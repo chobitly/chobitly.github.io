@@ -3,7 +3,7 @@ date:   2015-05-07 22:51:51
 tags: Android
 ---
 
-记录一下公司工作里使用AndroidAnnotations出现的一个问题的解决。
+记录一下公司工作里使用AndroidAnnotations出现的一个问题的解决过程。
 <!--more-->
 由AA的实现机制可知，一个被标记为`@Background`的方法，例如：
 
