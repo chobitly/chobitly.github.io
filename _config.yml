@@ -5,14 +5,14 @@
 # Site
 title: Chobitly
 subtitle: 程序媛, Android Developer, Java Developer, ..., 二次元爱好者, ...
-description: 
+description:
 author: Chobitly
 language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://chobitly.gitcafe.io
+url: https://chobitly.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -64,6 +64,10 @@ pagination_dir: page
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
 theme: yilia
+#theme: NexT #https://github.com/iissnan/hexo-theme-next
+stylus:
+  compress: true
+
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
