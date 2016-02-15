@@ -1,5 +1,6 @@
 title: Android入门
 date: 2015-10-20 21:24:52
+categories: 程序媛
 tags:
 	- Android
 	- Training

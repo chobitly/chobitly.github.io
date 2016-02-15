@@ -1,5 +1,6 @@
 title:	利用 Android Studio 和 Gradle 打包多版本APK
 date:	2016-02-05 12:12:12
+categories: 程序媛
 tags:
 	- Android Studio
 	- Gradle

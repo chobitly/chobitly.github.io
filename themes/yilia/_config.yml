@@ -32,11 +32,13 @@ animate: false
 open_in_new: false
 
 # Miscellaneous
-google_analytics: ''
+google_analytics: 'UA-33872452-2'
 favicon: /favicon.png
 
 #你的头像url
 avatar: https://avatars1.githubusercontent.com/u/498196?v=3&s=460
+#avatar: https://s.gravatar.com/avatar/d215667910cbc2be38db18917c249713?s=80
+#avatar: https://s.gravatar.com/avatar/873dc1dff04df4fca4edff6bcc029631?s=80
 #是否开启分享
 share: true
 #是否开启多说评论，填写你在多说申请的项目名称 duoshuo: duoshuo-key

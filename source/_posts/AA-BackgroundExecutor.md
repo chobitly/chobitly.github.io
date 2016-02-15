@@ -1,6 +1,7 @@
 title:	Somethings about AA's BackgroundExecutor
 date:	2015-05-07 22:51:51
-tags:	
+categories: 程序媛
+tags:
 	- Android
 	- AndroidAnnotations
 ---
@@ -54,14 +55,14 @@ AA实际生成的代码是：
 “别高兴的太早，继续看下去，问题解决了吗？”带着疑问滚动着页面，终于发现了这么一条回复：
 
 > rom1v commented on 11 Jun 2013
-> 
+>
 > @RomainPiel The executor has a fixed number of threads.
 > If you submit more tasks than this threshold, then your tasks will be blocked until previous ones have completed execution.
-> 
+>
 > Before pull request #569, Executor implementation was Executors.newCachedThreadPool(), so your threads were not blocked above a threshold.
-> 
+>
 > But you should not rely on this unspecified behaviour: if you need to start a lot of long-running threads, then you must set your own Executor to ensure the behaviour:
-> 
+>
 > `BackgroundExecutor.setExecutor(Executors.newCachedThreadPool());`
 
 顺着这条回复提供的线索，我找到pull request #569当时对`BackgroundExecutor`所做的更改，在这次提交中，`BackgroundExecutor`的`DEFAULT_EXECUTOR`被改成了
