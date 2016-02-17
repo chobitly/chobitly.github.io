@@ -17,10 +17,14 @@ root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
+# Duoshuo ShortName
+duoshuo_shortname: chobitly
+# Share
+duoshuo_share: true
 # Google Analysis
-#google_analytics: UA-33872452-2
+google_analytics: UA-33872452-2
 # Google Web Master
-#google_site_verification: FYnDiBKknJTRkOEahMuUGjnFLD5_TBptwF6xMVOLPUM
+google_site_verification: FYnDiBKknJTRkOEahMuUGjnFLD5_TBptwF6xMVOLPUM
 
 # Directory
 source_dir: source
