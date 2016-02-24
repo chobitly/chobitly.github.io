@@ -21,6 +21,8 @@ permalink_defaults:
 duoshuo_shortname: chobitly
 # Share
 duoshuo_share: true
+# 多说热评文章 true 或者 false
+duoshuo_hotartical: false
 # Google Analysis
 google_analytics: UA-33872452-2
 # Google Web Master
