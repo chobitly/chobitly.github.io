@@ -36,7 +36,7 @@ tags:
 
 ## productFlavors（不同定制的产品）
 完成的 build.gradle 文件中 productFlavors 部分节选如下：
-```
+```gradle
 productFlavors {
     flavor_default {
     }
@@ -70,7 +70,7 @@ Line 10、14 manifestPlaceholders 中所设置的变量可以直接使用在 And
 
 ## buildTypes（构建类型）
 完成的 build.gradle 文件中 buildTypes 代码段大致如下：
-```
+```gradle
 buildTypes {
     debug {
         versionNameSuffix '.debug'
@@ -126,7 +126,7 @@ productFlavor 同样也会生成一个新的 apk —— 即项目的输出将会
 代码中可以通过甄别不同的 productFlavor 和 buildType 实现程序的不同行为。若为项目开启了 JDK 7 的支持，更可以在 switch 中使用字符串条件来进行甄别，代码更加清晰，维护更加方便。
 
 使用 JDK 7 需要修改构建文件， buildTools 要使用 19 以上版本，还要增加 compileOptions 配置：
-```
+```gradle
 android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -138,7 +138,7 @@ android {
 
 ## multi-applicationId 与 AndroidAnnotations
 为使得 AndroidAnnotations 框架能够兼容不同的 applicationId 设置， apt.arguments.resourcePackageName 参数一定要设置，例如：
-```
+```gradle
 apt {
     arguments {
         androidManifestFile variant.outputs[0]?.processResources?.manifestFile
@@ -152,7 +152,7 @@ apt {
 
 ## multi-applicationId 与 Robolectric
 为使得 Robolectric 测试框架能在测试运行时找到正确的包名、manifest文件和资源文件夹， @Config 中的 packageName 、 manifest 和 resourceDir 参数一定要设置
-```
+```java
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(sdk = 21, packageName = "cn.happylike.shopkeeper",
         manifest = "./build/intermediates/manifests/full/"
@@ -176,7 +176,7 @@ public class MainActivityTest {
 但这样一来，若是签名文件也纳入版本管理内，则签名文件将被提交到远程仓库，远程仓库中既有签名文件又有签名文件的密码（已经写在 build.gradle 文件里了），泄密可能大大增加；即使签名文件不纳入版本管理，也存在开发人员使用整个项目打包的形式交流代码时无意间泄露签名文件的可能。
 
 最终我使用了参考文档[6]中的一个方法的变种，在 gradle.properties 文件中定义相关参数：
-```
+```properties
 RELEASE_STORE_FILE={path to your keystore}
 RELEASE_STORE_PASSWORD=******
 RELEASE_KEY_ALIAS=****
@@ -184,7 +184,7 @@ RELEASE_KEY_PASSWORD=******
 ```
 
 上述参数在 build.gradle 中的应用如下代码所示：
-```
+```gradle
 signingConfigs {
     ilike {
         storeFile file(RELEASE_STORE_FILE)

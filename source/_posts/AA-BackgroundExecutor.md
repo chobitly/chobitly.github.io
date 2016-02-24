@@ -9,7 +9,7 @@ tags:
 记录一下公司工作里使用AndroidAnnotations出现的一个问题的解决过程。
 <!--more-->
 由AA的实现机制可知，一个被标记为`@Background`的方法，例如：
-
+```java
 	@EActivity(R.layout.activity_main)
 	public class SampleActivity extends Activity {
 		...		
@@ -19,9 +19,10 @@ tags:
 		}
 		...
 	}
+```
 
 AA实际生成的代码是：
-
+```java
 	public class SampleActivity_ extends SampleActivity implements HasViews, OnViewChangedListener {
 		...
 		@Override
@@ -39,6 +40,7 @@ AA实际生成的代码是：
 		}
 		...
 	}
+```
 
 因此，我们在方法`method()`中写的代码，即使是进了方法后的第一行代码，事实上也必须在`BackgroundExecutor`从线程池中获取到可用的后台线程后，才会被执行，如果线程池当前已满，就必须等到现有的线程有彻底执行完毕的，才会将执行`method()`中的代码排上日程，于是在低配手机上，频繁测试后很容易出现按钮不响应的现象——线程池满啦！
 这显然是我们不愿意见到的。
