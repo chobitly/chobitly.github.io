@@ -80,10 +80,10 @@ AA实际生成的代码是：
 * 用回`Executors.newScheduledThreadPool(n)`，但是要如何确定一个合适的`n`值？
 * 是否还有其他`Executor`能够实现线程池的动态扩展，按需扩展？
 * ……
-* AA现在提供了为`@Background`方法指定ID来实现cancel，在何时的时候取消后台线程的执行，从代码编写上更严密地避免无用后台线程占用资源。
+* AA现在提供了为`@Background`方法指定ID来实现cancel，在合适的时候取消后台线程的执行，从代码编写上更严密地避免无用后台线程占用资源。
 * 是否自己实现一个新的`Executor`来满足以上所有需求？
 
-以上，就是这两天解决问题的所思所想。对公司其他使用了AA的项目，建议了先采用当前的解决方案，在应用的`MainApplication`的`onCreate()`方法中增加`BackgroundExecutor.setExecutor(Executors.newCachedThreadPool());`来应对低配手机上的不响应问题。
+以上，就是这两天解决问题的所思所想。对公司其他使用了AA的项目，建议先采用当前的解决方案，在应用的`MainApplication`的`onCreate()`方法中增加`BackgroundExecutor.setExecutor(Executors.newCachedThreadPool());`来应对低配手机上的不响应问题。
 求大神们提出更好的解决资源浪费问题的解决方案～～
 
 #### END
