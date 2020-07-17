@@ -14,8 +14,8 @@ subnav:
   #douban: "#"
   #mail: "chobitly@gmail.com"
   #facebook: "#"
-  google: "https://plus.google.com/+汪璐chobitly"
-  twitter: "https://twitter.com/chobitly"
+  #google: "https://plus.google.com/+汪璐chobitly"
+  #twitter: "https://twitter.com/chobitly"
   #linkedin: "#"
 
 rss: /atom.xml
