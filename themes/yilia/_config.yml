@@ -2,7 +2,9 @@
 menu:
   主页: /
   所有文章: /archives
-  #Android: /tags/Android
+  分类: /categories
+  标签: /tags
+  # 友链: /links
   关于我: /about
 
 # SubNav
