@@ -80,7 +80,7 @@ theme: orange #https://github.com/Orange-way/hexo-theme-orange
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
-deploy:
-- type: git
-  repo: https://github.com/chobitly/chobitly.github.io.git
-  branch: master
+# deploy:
+# - type: git
+#   repo: https://github.com/chobitly/chobitly.github.io.git
+#   branch: master
