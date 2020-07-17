@@ -17,12 +17,6 @@ root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
-# Duoshuo ShortName
-duoshuo_shortname: chobitly
-# Share
-duoshuo_share: true
-# 多说热评文章 true 或者 false
-duoshuo_hotartical: false
 # Google Analysis
 google_analytics: UA-33872452-2
 # Google Web Master
@@ -75,7 +69,11 @@ pagination_dir: page
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
 #theme: yilia
-theme: next #https://github.com/iissnan/hexo-theme-next
+#theme: inside #有插件#https://github.com/ikeq/hexo-theme-inside
+#theme: purer #有插件#https://github.com/fengkx/hexo-theme-purer
+#theme: typography #有插件#https://github.com/SumiMakito/hexo-theme-typography
+theme: orange #https://github.com/Orange-way/hexo-theme-orange
+#theme: next #https://github.com/iissnan/hexo-theme-next
 #stylus:
 #  compress: true
 
