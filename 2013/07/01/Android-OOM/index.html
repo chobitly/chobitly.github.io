@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>记一次Android OOM问题的解决 | Chobitly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一个困扰了我一个多礼拜的OOM bug今天终于给解决掉了，前辈攻城狮说OOM这种东西总是由不起眼的东西引起的，此言不虚啊！最初客户回报上来的症状是程序莫名卡死、黑屏，无法操作乃至需要重启设备才能恢复正常（ 这里我学到了一个道理：客户都是没什么耐心的。 其实多等几秒系统杀掉程序出现FC对话框就不需要重启设备了的说）。">
+<meta name="keywords" content="Android,OOM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次Android OOM问题的解决">
+<meta property="og:url" content="https://chobitly.github.io/2013/07/01/Android-OOM/index.html">
+<meta property="og:site_name" content="Chobitly">
+<meta property="og:description" content="一个困扰了我一个多礼拜的OOM bug今天终于给解决掉了，前辈攻城狮说OOM这种东西总是由不起眼的东西引起的，此言不虚啊！最初客户回报上来的症状是程序莫名卡死、黑屏，无法操作乃至需要重启设备才能恢复正常（ 这里我学到了一个道理：客户都是没什么耐心的。 其实多等几秒系统杀掉程序出现FC对话框就不需要重启设备了的说）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-07-17T06:07:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一次Android OOM问题的解决">
+<meta name="twitter:description" content="一个困扰了我一个多礼拜的OOM bug今天终于给解决掉了，前辈攻城狮说OOM这种东西总是由不起眼的东西引起的，此言不虚啊！最初客户回报上来的症状是程序莫名卡死、黑屏，无法操作乃至需要重启设备才能恢复正常（ 这里我学到了一个道理：客户都是没什么耐心的。 其实多等几秒系统杀掉程序出现FC对话框就不需要重启设备了的说）。">
+  
+    <link rel="alternative" href="/atom.xml" title="Chobitly" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="https://avatars1.githubusercontent.com/u/498196?v=3&amp;s=460" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Chobitly</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签云</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/chobitly" title="github">github</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 15px;">Android Studio</a> <a href="/tags/Android-Training/" style="font-size: 10px;">Android Training</a> <a href="/tags/AndroidAnnotations/" style="font-size: 15px;">AndroidAnnotations</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Hello-World/" style="font-size: 10px;">Hello World</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Meta-Data/" style="font-size: 10px;">Meta Data</a> <a href="/tags/OOM/" style="font-size: 10px;">OOM</a> <a href="/tags/Robolectric/" style="font-size: 10px;">Robolectric</a> <a href="/tags/Training/" style="font-size: 10px;">Training</a> <a href="/tags/打包Apk/" style="font-size: 15px;">打包Apk</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Chobitly</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://avatars1.githubusercontent.com/u/498196?v=3&amp;s=460" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Chobitly</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/chobitly" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Android-OOM" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/07/01/Android-OOM/" class="article-date">
+  	<time datetime="2013-07-01T10:39:19.000Z" itemprop="datePublished">2013-07-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      记一次Android OOM问题的解决
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOM/">OOM</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/程序媛/">程序媛</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一个困扰了我一个多礼拜的OOM bug今天终于给解决掉了，前辈攻城狮说OOM这种东西总是由不起眼的东西引起的，此言不虚啊！<br>最初客户回报上来的症状是程序莫名卡死、黑屏，无法操作乃至需要重启设备才能恢复正常（ <strong>这里我学到了一个道理：客户都是没什么耐心的。</strong> 其实多等几秒系统杀掉程序出现FC对话框就不需要重启设备了的说）。<br><a id="more"></a></p>
+<p>起初我希望能重现bug然后根据Logcat的报告定位错误，但是尽管我用尽办法各种虐待我的GN，总是无法重现问题。这样没头没脑地耗了两天（期间还在做别的代码，也没浪费时间），于是在一个闷热的下午，程序媛我背上背包出了现场。（为了出这个现场还差点把自己笔记本的网卡们搞死，真是辛苦它们了。）<br>总觉得我有bug退散体质的说，在客户店里从下午坐到晚上一直风平浪静，倒是刚到那里的时候随便点了两下就在Logcat里捕捉到了一次OOM。<br>晚上九点收集了一下服务员们的使用体验并征求老板同意带回了一台设备准备进一步查找问题。</p>
+<p>第二天一早刚开始研究就又出现OOM了，这时候我反省了一下盲目寻找容易引起OOM的代码模式加以修改的做法，开始用内存分析工具武装我的Eclipse，装了MAT插件。<br>接下来各种测试各种看内存分析报告，首先是了解了GN不能重现黑屏问题的原因——丫为一个App分配了四五十兆的内存的情况下还是能蹒跚而行，而客户用的采用三星定制Rom的设备可没有如此大的胸怀。不过至少GN也是会有潜在OOM的可能的，我可以把客户的设备还回去了。</p>
+<p>能够定位到无法GC的Activity有一大半要归功于运气，我就是在无数的类列表里看到了它！其实它本身占用的内存并不大，根本排不到前面，我几乎是在绝望的时候漫无目的地随手展开着内存报告的列表的时候注意到了它出现了多个实例！虽然一个Activity占用的内存不大，但是一个Activity里会有很多控件，这样一套下来的内存占用也很可观了！<br>自此我开始专注于这个Activity内部寻找引起OOM的代码，这里离最终解决其实还是有很大差距的，但是内容我就不详述了，不外乎是各种二分法缩小问题代码范围。<br><strong>最终找到的原因是我在一个Dialog的布局xml里使用了<code>&lt;requestForcs  /&gt;</code>这一句，去掉以后各种正常。</strong></p>
+<p>兴奋过后回顾在今天下午定位到这一句之前走过的一些弯路，突然发现有一点并不能很好的得到解释：<br>我曾经试过注释掉那个Acitivity里几乎所有的代码（为什么说是几乎所有呢？后面解释），然后更换Activity的指向的界面xml，同样内容的两个xml文件（都不是最初引起不释放的那个布局文件）却一个能够释放一个不能释放；这个诡异的现象在我去掉这个Activity主题中的android:windowIsTranslucent属性后消失了，所以我曾经一度认为是这个属性引起的bug，不过最后找到问题所在以后做的回归测试给它平了反。<br>虽然现在问题得到了解决，但是这个查找问题过程中碰到的诡异现象实在是有些匪夷所思。没错，我前面所说的注释掉的“几乎所有”的代码中，并不包括引起问题的代码，那一份错误的xml在我为Acitivity更换各种xml的过程中始终都是会被加载的——我在一个自定义对话框的构造函数中inflate了它，而new那个对话框的语句在我更换Activity的布局文件过程中始终在运行着。<br><em>Maybe，我只是眼花了。</em></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/07/AA-BackgroundExecutor/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Somethings about AA&#39;s BackgroundExecutor
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1986/10/31/Hello-World/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android-OOM" data-title="记一次Android OOM问题的解决" data-url="https://chobitly.github.io/2013/07/01/Android-OOM/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"chobitly"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2020 Chobitly
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33872452-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
