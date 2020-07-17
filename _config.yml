@@ -7,7 +7,7 @@ title: Chobitly
 subtitle:
 description: 程序媛, ...,<br> 二次元爱好者, ...
 author: Chobitly
-language: zh-Hans
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -68,9 +68,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: yilia
+#theme: yilia
 #theme: inside #有插件#https://github.com/ikeq/hexo-theme-inside
-#theme: purer #有插件#https://github.com/fengkx/hexo-theme-purer
+theme: purer #https://github.com/fengkx/hexo-theme-purer
 #theme: typography #有插件#https://github.com/SumiMakito/hexo-theme-typography
 #theme: orange #https://github.com/Orange-way/hexo-theme-orange
 ##theme: next #https://github.com/iissnan/hexo-theme-next
