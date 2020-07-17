@@ -68,9 +68,10 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-#theme: yilia
+theme: yilia
+#theme: phase
 #theme: inside #有插件#https://github.com/ikeq/hexo-theme-inside
-theme: purer #https://github.com/fengkx/hexo-theme-purer
+#theme: purer #https://github.com/fengkx/hexo-theme-purer
 #theme: typography #有插件#https://github.com/SumiMakito/hexo-theme-typography
 #theme: orange #https://github.com/Orange-way/hexo-theme-orange
 ##theme: next #https://github.com/iissnan/hexo-theme-next
