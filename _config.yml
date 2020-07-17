@@ -68,7 +68,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: jekyll-theme-hacker
+theme: yilia
 #theme: inside #有插件#https://github.com/ikeq/hexo-theme-inside
 #theme: purer #有插件#https://github.com/fengkx/hexo-theme-purer
 #theme: typography #有插件#https://github.com/SumiMakito/hexo-theme-typography
