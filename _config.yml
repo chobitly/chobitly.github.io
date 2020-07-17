@@ -8,7 +8,7 @@ subtitle:
 description: 程序媛, ...,<br> 二次元爱好者, ...
 author: Chobitly
 language: zh-Hans
-timezone:
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
