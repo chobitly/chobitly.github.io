@@ -15,5 +15,6 @@ deploy:
   keep-history: true
   on:
     branch: hexo
-  target: master
+  target: 
+    branch: master
   local-dir: public
